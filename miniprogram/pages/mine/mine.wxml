@@ -1,0 +1,47 @@
+<view class="mine-page">
+  <view class="user-card" wx:if="{{userInfo}}">
+    <view class="user-info">
+      <view class="avatar">
+        <text class="avatar-text">{{userInfo.name.charAt(0)}}</text>
+      </view>
+      <view class="user-detail">
+        <view class="user-name">{{userInfo.name}}</view>
+        <view class="user-phone">{{userInfo.phone || '未设置手机号'}}</view>
+        <view class="user-role">
+          <text class="tag tag-primary">{{userInfo.role === 'tenant' ? '租户' : userInfo.role}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="user-card" wx:else>
+    <view class="user-info">
+      <view class="avatar">
+        <text class="avatar-text">?</text>
+      </view>
+      <view class="user-detail">
+        <view class="user-name">未登录</view>
+        <view class="user-tip">登录后体验更多功能</view>
+      </view>
+      <view class="login-btn" bindtap="goToLogin">
+        立即登录
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-list card">
+    <view class="menu-item" wx:for="{{menuList}}" wx:key="name" bindtap="goToPage" data-url="{{item.url}}">
+      <view class="menu-icon">
+        <text class="icon-text">{{item.name.charAt(0)}}</text>
+      </view>
+      <view class="menu-name">{{item.name}}</view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="logout-section" wx:if="{{userInfo}}">
+    <button class="logout-btn" bindtap="handleLogout">
+      退出登录
+    </button>
+  </view>
+</view>

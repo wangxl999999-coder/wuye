@@ -1,0 +1,12 @@
+<view class="detail-page" wx:if="{{announcement}}">
+  <view class="detail-header card">
+    <view class="detail-title">{{announcement.title}}</view>
+    <view class="detail-meta">
+      <text class="detail-time">{{announcement.created_at}}</text>
+      <text class="detail-author">发布人：{{announcement.creator_name || '物业'}}</text>
+    </view>
+  </view>
+  <view class="detail-content card">
+    {{announcement.content}}
+  </view>
+</view>

@@ -1,0 +1,46 @@
+<view class="fees-page">
+  <view class="summary-card">
+    <view class="summary-title">待缴物业费</view>
+    <view class="summary-amount">¥ {{unpaidAmount.toFixed(2)}}</view>
+    <view class="summary-desc">共 {{fees.filter(f => f.status === 'unpaid').length}} 笔待缴费</view>
+  </view>
+
+  <view class="list-container">
+    <view class="list-header">
+      <text class="list-title">缴费记录</text>
+    </view>
+    
+    <view class="fee-item card" wx:for="{{fees}}" wx:key="id">
+      <view class="fee-header">
+        <view class="fee-month">{{item.month}}</view>
+        <view class="fee-status">
+          <text class="tag {{item.status === 'unpaid' ? 'tag-warning' : 'tag-success'}}">
+            {{item.status === 'unpaid' ? '待缴费' : '已缴费'}}
+          </text>
+        </view>
+      </view>
+      <view class="fee-detail">
+        <view class="fee-type">{{item.type === 'property' ? '物业费' : item.type}}</view>
+        <view class="fee-amount">¥ {{item.amount.toFixed(2)}}</view>
+      </view>
+      <view class="fee-footer">
+        <view class="fee-due" wx:if="{{item.due_date}}">截止日期：{{item.due_date}}</view>
+        <view class="fee-pay">
+          <button 
+            class="btn-primary" 
+            size="mini" 
+            wx:if="{{item.status === 'unpaid'}}"
+            bindtap="payFee"
+            data-id="{{item.id}}"
+          >
+            立即缴费
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-text" wx:if="{{fees.length === 0 && !loading}}">
+      暂无缴费记录
+    </view>
+  </view>
+</view>

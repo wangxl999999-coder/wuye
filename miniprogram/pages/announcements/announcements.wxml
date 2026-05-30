@@ -1,0 +1,18 @@
+<view class="announcements-page">
+  <view class="list-container">
+    <view class="announcement-item card" wx:for="{{announcements}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="announcement-header">
+        <view class="announcement-title">
+          <text class="tag {{getPriorityClass(item.priority)}}" wx:if="{{item.priority === 'high'}}">重要</text>
+          {{item.title}}
+        </view>
+        <view class="announcement-time">{{item.created_at}}</view>
+      </view>
+      <view class="announcement-content">{{item.content}}</view>
+    </view>
+
+    <view class="empty-text" wx:if="{{announcements.length === 0}}">
+      暂无公告
+    </view>
+  </view>
+</view>

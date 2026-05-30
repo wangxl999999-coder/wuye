@@ -1,0 +1,68 @@
+<view class="repairs-page">
+  <view class="action-bar">
+    <button class="add-btn btn-primary" bindtap="showFormDialog">
+      + 我要报修
+    </button>
+  </view>
+
+  <view class="list-container">
+    <view class="repair-item card" wx:for="{{repairs}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="repair-header">
+        <view class="repair-title">{{item.title}}</view>
+        <text class="tag {{getStatusClass(item.status)}}">{{getStatusText(item.status)}}</text>
+      </view>
+      <view class="repair-desc">{{item.description || '暂无描述'}}</view>
+      <view class="repair-footer">
+        <text class="repair-type">{{item.type}}</text>
+        <text class="repair-time">{{item.created_at}}</text>
+      </view>
+    </view>
+
+    <view class="empty-text" wx:if="{{repairs.length === 0}}">
+      暂无报修记录
+    </view>
+  </view>
+
+  <view class="form-dialog" wx:if="{{showForm}}" bindtap="closeForm">
+    <view class="form-content" catchtap="">
+      <view class="form-header">
+        <text class="form-title">提交报修</text>
+        <text class="form-close" bindtap="closeForm">×</text>
+      </view>
+      <view class="form-body">
+        <view class="form-item">
+          <text class="form-label">报修类型</text>
+          <picker mode="selector" range="{{repairTypes}}" range-key="label" bindchange="onTypeChange">
+            <view class="picker-input">
+              {{repairTypes.find(t => t.value === formData.type).label}}
+            </view>
+          </picker>
+        </view>
+        <view class="form-item">
+          <text class="form-label">报修标题</text>
+          <input 
+            class="form-input" 
+            placeholder="请输入报修标题" 
+            value="{{formData.title}}"
+            data-field="title"
+            bindinput="onInputChange"
+          />
+        </view>
+        <view class="form-item">
+          <text class="form-label">详细描述</text>
+          <textarea 
+            class="form-textarea" 
+            placeholder="请详细描述报修内容" 
+            value="{{formData.description}}"
+            data-field="description"
+            bindinput="onInputChange"
+          />
+        </view>
+      </view>
+      <view class="form-footer">
+        <button class="cancel-btn" bindtap="closeForm">取消</button>
+        <button class="submit-btn btn-primary" bindtap="submitRepair">提交</button>
+      </view>
+    </view>
+  </view>
+</view>

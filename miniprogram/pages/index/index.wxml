@@ -1,0 +1,79 @@
+<view class="index-page">
+  <view class="user-card" wx:if="{{userInfo}}">
+    <view class="user-info">
+      <view class="avatar">
+        <text class="avatar-text">{{userInfo.name.charAt(0)}}</text>
+      </view>
+      <view class="user-detail">
+        <view class="user-name">{{userInfo.name}}</view>
+        <view class="user-role">
+          <text class="tag tag-primary">{{userInfo.role === 'tenant' ? '租户' : userInfo.role}}</text>
+        </view>
+        <view class="user-room" wx:if="{{userInfo.building}}">
+          {{userInfo.building}} {{userInfo.room}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="user-card" wx:else>
+    <view class="user-info">
+      <view class="avatar">
+        <text class="avatar-text">?</text>
+      </view>
+      <view class="user-detail">
+        <view class="user-name">未登录</view>
+        <view class="user-tip">点击登录查看更多功能</view>
+      </view>
+      <view class="login-btn" bindtap="goToLogin">
+        登录
+      </view>
+    </view>
+  </view>
+
+  <view class="quick-actions card">
+    <view class="action-item" wx:for="{{quickActions}}" wx:key="name" bindtap="goToAction" data-url="{{item.url}}">
+      <view class="action-icon" style="background: {{item.color}}20;">
+        <text class="icon-text" style="color: {{item.color}};">{{item.name.charAt(0)}}</text>
+      </view>
+      <view class="action-name">{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="section-header">
+      <text class="section-title">物业公告</text>
+      <text class="section-more">查看全部</text>
+    </view>
+    <view class="announcement-list">
+      <view class="announcement-item" wx:for="{{announcements}}" wx:key="id" bindtap="goToAnnouncementDetail" data-id="{{item.id}}">
+        <view class="announcement-title">
+          <text class="tag tag-danger" wx:if="{{item.priority === 'high'}}">重要</text>
+          {{item.title}}
+        </view>
+        <view class="announcement-time">{{item.created_at}}</view>
+      </view>
+      <view class="empty-text" wx:if="{{announcements.length === 0}}">
+        暂无公告
+      </view>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="section-header">
+      <text class="section-title">待办提醒</text>
+    </view>
+    <view class="event-list">
+      <view class="event-item" wx:for="{{events}}" wx:key="id">
+        <view class="event-dot"></view>
+        <view class="event-content">
+          <view class="event-title">{{item.title}}</view>
+          <view class="event-desc">{{item.description || '请及时处理'}}</view>
+        </view>
+      </view>
+      <view class="empty-text" wx:if="{{events.length === 0}}">
+        暂无待办事项
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/fees/fees",
+    "pages/repairs/repairs",
+    "pages/complaints/complaints",
+    "pages/announcements/announcements",
+    "pages/activities/activities",
+    "pages/mine/mine",
+    "pages/repair-detail/repair-detail",
+    "pages/announcement-detail/announcement-detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#409EFF",
+    "navigationBarTitleText": "智慧物业",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#409EFF",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/icons/home.png",
+        "selectedIconPath": "static/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/fees/fees",
+        "text": "物业费",
+        "iconPath": "static/icons/fee.png",
+        "selectedIconPath": "static/icons/fee-active.png"
+      },
+      {
+        "pagePath": "pages/repairs/repairs",
+        "text": "报修",
+        "iconPath": "static/icons/repair.png",
+        "selectedIconPath": "static/icons/repair-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "static/icons/mine.png",
+        "selectedIconPath": "static/icons/mine-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

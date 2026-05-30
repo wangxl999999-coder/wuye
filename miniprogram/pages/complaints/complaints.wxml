@@ -1,0 +1,72 @@
+<view class="complaints-page">
+  <view class="action-bar">
+    <button class="add-btn btn-primary" bindtap="showFormDialog">
+      + 提交投诉
+    </button>
+  </view>
+
+  <view class="list-container">
+    <view class="complaint-item card" wx:for="{{complaints}}" wx:key="id">
+      <view class="complaint-header">
+        <view class="complaint-title">{{item.title}}</view>
+        <text class="tag {{getStatusClass(item.status)}}">{{getStatusText(item.status)}}</text>
+      </view>
+      <view class="complaint-desc">{{item.description || '暂无描述'}}</view>
+      <view class="complaint-reply" wx:if="{{item.reply}}">
+        <view class="reply-label">物业回复：</view>
+        <view class="reply-content">{{item.reply}}</view>
+      </view>
+      <view class="complaint-footer">
+        <text class="complaint-type">{{item.type}}</text>
+        <text class="complaint-time">{{item.created_at}}</text>
+      </view>
+    </view>
+
+    <view class="empty-text" wx:if="{{complaints.length === 0}}">
+      暂无投诉记录
+    </view>
+  </view>
+
+  <view class="form-dialog" wx:if="{{showForm}}" bindtap="closeForm">
+    <view class="form-content" catchtap="">
+      <view class="form-header">
+        <text class="form-title">提交投诉</text>
+        <text class="form-close" bindtap="closeForm">×</text>
+      </view>
+      <view class="form-body">
+        <view class="form-item">
+          <text class="form-label">投诉类型</text>
+          <picker mode="selector" range="{{complaintTypes}}" range-key="label" bindchange="onTypeChange">
+            <view class="picker-input">
+              {{complaintTypes.find(t => t.value === formData.type).label}}
+            </view>
+          </picker>
+        </view>
+        <view class="form-item">
+          <text class="form-label">投诉标题</text>
+          <input 
+            class="form-input" 
+            placeholder="请输入投诉标题" 
+            value="{{formData.title}}"
+            data-field="title"
+            bindinput="onInputChange"
+          />
+        </view>
+        <view class="form-item">
+          <text class="form-label">详细描述</text>
+          <textarea 
+            class="form-textarea" 
+            placeholder="请详细描述投诉内容" 
+            value="{{formData.description}}"
+            data-field="description"
+            bindinput="onInputChange"
+          />
+        </view>
+      </view>
+      <view class="form-footer">
+        <button class="cancel-btn" bindtap="closeForm">取消</button>
+        <button class="submit-btn btn-primary" bindtap="submitComplaint">提交</button>
+      </view>
+    </view>
+  </view>
+</view>

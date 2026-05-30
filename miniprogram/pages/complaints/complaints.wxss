@@ -1,0 +1,69 @@
+@import "../repairs/repairs.wxss";
+
+.complaint-item {
+  margin-bottom: 20rpx;
+}
+
+.complaint-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.complaint-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.complaint-desc {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+  line-height: 1.5;
+}
+
+.complaint-reply {
+  background: #f5f7fa;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.reply-label {
+  font-size: 24rpx;
+  color: #409EFF;
+  margin-bottom: 8rpx;
+}
+
+.reply-content {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.5;
+}
+
+.complaint-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.complaint-type {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.complaint-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.empty-text {
+  text-align: center;
+  padding: 80rpx;
+  color: #999;
+  font-size: 28rpx;
+}

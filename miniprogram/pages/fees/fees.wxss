@@ -1,0 +1,105 @@
+.fees-page {
+  padding-bottom: 40rpx;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 20rpx;
+  padding: 40rpx;
+  border-radius: 16rpx;
+  color: white;
+  text-align: center;
+}
+
+.summary-title {
+  font-size: 28rpx;
+  opacity: 0.9;
+  margin-bottom: 16rpx;
+}
+
+.summary-amount {
+  font-size: 56rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+}
+
+.summary-desc {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+.list-container {
+  padding: 0 20rpx;
+}
+
+.list-header {
+  padding: 20rpx 0;
+}
+
+.list-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.fee-item {
+  margin-bottom: 20rpx;
+}
+
+.fee-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.fee-month {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.fee-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-top: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.fee-type {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.fee-amount {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #F56C6C;
+}
+
+.fee-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16rpx;
+}
+
+.fee-due {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.fee-pay button {
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 8rpx;
+}
+
+.empty-text {
+  text-align: center;
+  padding: 80rpx;
+  color: #999;
+  font-size: 28rpx;
+}

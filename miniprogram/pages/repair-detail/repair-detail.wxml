@@ -1,0 +1,33 @@
+<view class="detail-page" wx:if="{{repair}}">
+  <view class="detail-card card">
+    <view class="detail-header">
+      <view class="detail-title">{{repair.title}}</view>
+      <text class="tag {{getStatusClass(repair.status)}}">{{getStatusText(repair.status)}}</text>
+    </view>
+    
+    <view class="detail-row">
+      <text class="row-label">报修类型：</text>
+      <text class="row-value">{{repair.type}}</text>
+    </view>
+    
+    <view class="detail-row">
+      <text class="row-label">提交时间：</text>
+      <text class="row-value">{{repair.created_at}}</text>
+    </view>
+    
+    <view class="detail-row" wx:if="{{repair.assignee_name}}">
+      <text class="row-label">处理人：</text>
+      <text class="row-value">{{repair.assignee_name}}</text>
+    </view>
+    
+    <view class="detail-section">
+      <text class="section-title">问题描述</text>
+      <view class="section-content">{{repair.description || '暂无描述'}}</view>
+    </view>
+    
+    <view class="detail-section" wx:if="{{repair.completed_at}}">
+      <text class="section-title">完成时间</text>
+      <view class="section-content">{{repair.completed_at}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,14 @@
+{
+  "name": "property-management-system",
+  "version": "1.0.0",
+  "description": "物业管理系统 - 包含管理后台、小程序端和API服务",
+  "scripts": {
+    "install:all": "cd server && npm install && cd ../admin && npm install",
+    "dev:server": "cd server && npm run dev",
+    "dev:admin": "cd admin && npm run dev",
+    "build:admin": "cd admin && npm run build"
+  },
+  "keywords": ["property", "management", "wechat-miniprogram"],
+  "author": "",
+  "license": "MIT"
+}
