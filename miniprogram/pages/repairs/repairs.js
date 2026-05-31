@@ -112,6 +112,9 @@ Page({
     return found ? found.label : ''
   },
 
+  stopPropagation() {
+  },
+
   getStatusClass(status) {
     const classes = {
       pending: 'tag-warning',

@@ -24,7 +24,7 @@
   </view>
 
   <view class="form-dialog" wx:if="{{showForm}}" bindtap="closeForm">
-    <view class="form-content" catchtap="">
+    <view class="form-content" catchtap="stopPropagation">
       <view class="form-header">
         <text class="form-title">提交报修</text>
         <text class="form-close" bindtap="closeForm">×</text>
