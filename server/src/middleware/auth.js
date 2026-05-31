@@ -22,8 +22,35 @@ const authenticate = (req, res, next) => {
   }
 };
 
+const optionalAuthenticate = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  
+  if (!token) {
+    req.user = null;
+    return next();
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'property_management_secret_key_2024');
+    db.get('SELECT id, username, name, role, phone, building, room FROM users WHERE id = ?', [decoded.userId], (err, user) => {
+      if (err || !user) {
+        req.user = null;
+      } else {
+        req.user = user;
+      }
+      next();
+    });
+  } catch (error) {
+    req.user = null;
+    next();
+  }
+};
+
 const authorize = (...roles) => {
   return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ message: '未提供认证令牌' });
+    }
     if (!roles.includes(req.user.role)) {
       return res.status(403).json({ message: '无权限访问此资源' });
     }
@@ -31,4 +58,4 @@ const authorize = (...roles) => {
   };
 };
 
-module.exports = { authenticate, authorize };
+module.exports = { authenticate, optionalAuthenticate, authorize };

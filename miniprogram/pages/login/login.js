@@ -46,14 +46,21 @@ Page({
         icon: 'success'
       })
 
-      setTimeout(() => {
+      setTimeout(function() {
         wx.switchTab({
           url: '/pages/index/index'
         })
       }, 1000)
     } catch (err) {
       wx.hideLoading()
-      console.error('登录失败', err)
+      var msg = '登录失败'
+      if (err && err.data && err.data.message) {
+        msg = err.data.message
+      }
+      wx.showToast({
+        title: msg,
+        icon: 'none'
+      })
     }
   }
 })

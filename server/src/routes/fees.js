@@ -16,7 +16,7 @@ router.get('/', authenticate, (req, res) => {
   `;
   const params = [];
 
-  if (req.user.role === 'tenant') {
+  if (req.user && req.user.role === 'tenant') {
     query += ' AND f.user_id = ?';
     params.push(req.user.id);
   }

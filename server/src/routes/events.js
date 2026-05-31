@@ -1,17 +1,17 @@
 const express = require('express');
 const db = require('../database/db');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticate, optionalAuthenticate, authorize } = require('../middleware/auth');
 
 const router = express.Router();
 
-router.get('/', authenticate, (req, res) => {
+router.get('/', optionalAuthenticate, (req, res) => {
   const { status, type, page = 1, limit = 20 } = req.query;
   const offset = (page - 1) * limit;
 
   let query = 'SELECT e.*, u.name as user_name, u.building, u.room FROM events e LEFT JOIN users u ON e.user_id = u.id WHERE 1=1';
   const params = [];
 
-  if (req.user.role === 'tenant') {
+  if (req.user && req.user.role === 'tenant') {
     query += ' AND e.user_id = ?';
     params.push(req.user.id);
   }
@@ -37,14 +37,14 @@ router.get('/', authenticate, (req, res) => {
   });
 });
 
-router.get('/stats', authenticate, (req, res) => {
+router.get('/stats', optionalAuthenticate, (req, res) => {
   const query = `
     SELECT 
       type,
       status,
       COUNT(*) as count
     FROM events
-    ${req.user.role === 'tenant' ? 'WHERE user_id = ' + req.user.id : ''}
+    ${req.user && req.user.role === 'tenant' ? 'WHERE user_id = ' + req.user.id : ''}
     GROUP BY type, status
   `;
 
@@ -56,7 +56,7 @@ router.get('/stats', authenticate, (req, res) => {
   });
 });
 
-router.get('/:id', authenticate, (req, res) => {
+router.get('/:id', optionalAuthenticate, (req, res) => {
   const { id } = req.params;
 
   db.get(

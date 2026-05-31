@@ -30,14 +30,16 @@ App({
           if (res.statusCode === 200) {
             resolve(res.data)
           } else if (res.statusCode === 401) {
-            wx.removeStorageSync('token')
-            wx.removeStorageSync('userInfo')
-            this.globalData.token = ''
-            this.globalData.userInfo = null
-            wx.showToast({
-              title: '请重新登录',
-              icon: 'none'
-            })
+            if (url.indexOf('/auth/login') === -1) {
+              wx.removeStorageSync('token')
+              wx.removeStorageSync('userInfo')
+              this.globalData.token = ''
+              this.globalData.userInfo = null
+              wx.showToast({
+                title: '请重新登录',
+                icon: 'none'
+              })
+            }
             reject(res)
           } else {
             wx.showToast({

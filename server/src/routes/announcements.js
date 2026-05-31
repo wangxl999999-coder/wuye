@@ -1,10 +1,10 @@
 const express = require('express');
 const db = require('../database/db');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticate, optionalAuthenticate, authorize } = require('../middleware/auth');
 
 const router = express.Router();
 
-router.get('/', authenticate, (req, res) => {
+router.get('/', optionalAuthenticate, (req, res) => {
   const { type, page = 1, limit = 20 } = req.query;
   const offset = (page - 1) * limit;
 
@@ -32,7 +32,7 @@ router.get('/', authenticate, (req, res) => {
   });
 });
 
-router.get('/:id', authenticate, (req, res) => {
+router.get('/:id', optionalAuthenticate, (req, res) => {
   const { id } = req.params;
 
   db.get(
