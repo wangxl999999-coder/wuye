@@ -38,7 +38,7 @@
           <text class="form-label">投诉类型</text>
           <picker mode="selector" range="{{complaintTypes}}" range-key="label" bindchange="onTypeChange">
             <view class="picker-input">
-              {{complaintTypes.find(t => t.value === formData.type).label}}
+              {{selectedTypeName}}
             </view>
           </picker>
         </view>

@@ -1,8 +1,8 @@
 <view class="fees-page">
   <view class="summary-card">
     <view class="summary-title">待缴物业费</view>
-    <view class="summary-amount">¥ {{unpaidAmount.toFixed(2)}}</view>
-    <view class="summary-desc">共 {{fees.filter(f => f.status === 'unpaid').length}} 笔待缴费</view>
+    <view class="summary-amount">¥ {{unpaidAmountStr}}</view>
+    <view class="summary-desc">共 {{unpaidCount}} 笔待缴费</view>
   </view>
 
   <view class="list-container">
@@ -21,7 +21,7 @@
       </view>
       <view class="fee-detail">
         <view class="fee-type">{{item.type === 'property' ? '物业费' : item.type}}</view>
-        <view class="fee-amount">¥ {{item.amount.toFixed(2)}}</view>
+        <view class="fee-amount">¥ {{item.amountStr}}</view>
       </view>
       <view class="fee-footer">
         <view class="fee-due" wx:if="{{item.due_date}}">截止日期：{{item.due_date}}</view>

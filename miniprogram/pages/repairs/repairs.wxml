@@ -34,7 +34,7 @@
           <text class="form-label">报修类型</text>
           <picker mode="selector" range="{{repairTypes}}" range-key="label" bindchange="onTypeChange">
             <view class="picker-input">
-              {{repairTypes.find(t => t.value === formData.type).label}}
+              {{selectedTypeName}}
             </view>
           </picker>
         </view>

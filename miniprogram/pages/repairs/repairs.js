@@ -9,6 +9,7 @@ Page({
       description: '',
       type: 'electrical'
     },
+    selectedTypeName: '水电维修',
     repairTypes: [
       { value: 'electrical', label: '水电维修' },
       { value: 'structure', label: '土建维修' },
@@ -31,7 +32,10 @@ Page({
   },
 
   showFormDialog() {
-    this.setData({ showForm: true })
+    this.setData({ 
+      showForm: true,
+      selectedTypeName: this._getTypeLabel(this.data.formData.type)
+    })
   },
 
   closeForm() {
@@ -41,7 +45,8 @@ Page({
         title: '',
         description: '',
         type: 'electrical'
-      }
+      },
+      selectedTypeName: '水电维修'
     })
   },
 
@@ -53,8 +58,10 @@ Page({
   },
 
   onTypeChange(e) {
+    const selectedType = this.data.repairTypes[e.detail.value]
     this.setData({
-      'formData.type': this.data.repairTypes[e.detail.value].value
+      'formData.type': selectedType.value,
+      selectedTypeName: selectedType.label
     })
   },
 
@@ -96,6 +103,13 @@ Page({
       closed: '已关闭'
     }
     return texts[status] || status
+  },
+
+  _getTypeLabel(typeValue) {
+    const found = this.data.repairTypes.find(function(item) {
+      return item.value === typeValue
+    })
+    return found ? found.label : ''
   },
 
   getStatusClass(status) {

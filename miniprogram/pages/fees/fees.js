@@ -4,7 +4,9 @@ Page({
   data: {
     fees: [],
     loading: false,
-    unpaidAmount: 0
+    unpaidAmount: 0,
+    unpaidAmountStr: '0.00',
+    unpaidCount: 0
   },
 
   onLoad() {
@@ -16,13 +18,25 @@ Page({
     try {
       const res = await app.request('/fees/my-fees')
       const fees = res.fees || []
-      const unpaidAmount = fees
-        .filter(f => f.status === 'unpaid')
-        .reduce((sum, f) => sum + f.amount, 0)
+      const unpaidFees = fees.filter(function(f) {
+        return f.status === 'unpaid'
+      })
+      const unpaidAmount = unpaidFees.reduce(function(sum, f) {
+        return sum + f.amount
+      }, 0)
+      
+      const feesWithFormattedAmount = fees.map(function(fee) {
+        return {
+          ...fee,
+          amountStr: fee.amount.toFixed(2)
+        }
+      })
       
       this.setData({ 
-        fees,
-        unpaidAmount
+        fees: feesWithFormattedAmount,
+        unpaidAmount,
+        unpaidAmountStr: unpaidAmount.toFixed(2),
+        unpaidCount: unpaidFees.length
       })
     } catch (err) {
       console.error('加载物业费失败', err)

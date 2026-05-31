@@ -9,6 +9,7 @@ Page({
       description: '',
       type: 'service'
     },
+    selectedTypeName: '服务态度',
     complaintTypes: [
       { value: 'service', label: '服务态度' },
       { value: 'environment', label: '环境卫生' },
@@ -33,7 +34,10 @@ Page({
   },
 
   showFormDialog() {
-    this.setData({ showForm: true })
+    this.setData({ 
+      showForm: true,
+      selectedTypeName: this._getTypeLabel(this.data.formData.type)
+    })
   },
 
   closeForm() {
@@ -43,7 +47,8 @@ Page({
         title: '',
         description: '',
         type: 'service'
-      }
+      },
+      selectedTypeName: '服务态度'
     })
   },
 
@@ -55,8 +60,10 @@ Page({
   },
 
   onTypeChange(e) {
+    const selectedType = this.data.complaintTypes[e.detail.value]
     this.setData({
-      'formData.type': this.data.complaintTypes[e.detail.value].value
+      'formData.type': selectedType.value,
+      selectedTypeName: selectedType.label
     })
   },
 
@@ -91,6 +98,13 @@ Page({
       closed: '已关闭'
     }
     return texts[status] || status
+  },
+
+  _getTypeLabel(typeValue) {
+    const found = this.data.complaintTypes.find(function(item) {
+      return item.value === typeValue
+    })
+    return found ? found.label : ''
   },
 
   getStatusClass(status) {
